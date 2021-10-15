@@ -1,9 +1,12 @@
 [submodule "sensors/vision_opencv"]
 	path = sensors/vision_opencv
 	url = git@github.com:ros-perception/vision_opencv.git
+	ignore = dirty
 [submodule "sensors/apriltags_ros"]
 	path = sensors/apriltags_ros
 	url = git@github.com:RIVeR-Lab/apriltags_ros.git
+	ignore = dirty
 [submodule "sensors/realsense-ros"]
 	path = sensors/realsense-ros
 	url = git@github.com:IntelRealSense/realsense-ros.git
+	ignore = dirty

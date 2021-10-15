@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="veh" default="seadrone"/>
+
+    <group ns="$(arg veh)">
+        <!--detect-->
+        <node name="camera_node" pkg="rpi_ipcam_base" type="cam.py" output="screen" />
+    </group>
+</launch>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <!--rviz-->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rpi_ipcam_base)/config/rviz/seadrone.rviz"/>
+</launch>
