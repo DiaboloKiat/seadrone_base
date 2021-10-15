@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="rviz" default="true"/>
+    <arg name="camera" default="true"/>
+    <arg name="veh" default="seadrone"/>
+
+    <!-- ROS serial control node 
+    <node name="arduino_control" pkg="rosserial_python" type="serial_node.py">
+        <param name="port" value="/dev/ttyACM0"/>
+        <param name="baud" value="57600"/>
+    </node>
+    -->
+
+    <group ns="$(arg veh)">
+        <group if="$(arg rviz)">
+            <!--Joystick_node-->
+            <node name="joystick_node" pkg="seadrone_control" type="joystick_node" output="screen"/>
+
+	    <!--Joystick-->
+	    <!--<node name="joy_node" pkg="joy" type="joy_node" output="screen"/>-->
+            
+            <group if="$(arg camera)">
+                <!--Camera-->
+                <node name="camera_node" pkg="rpi_ipcam_base" type="cam.py" output="screen"/>
+            </group>
+
+            <!--rviz-->
+            <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rpi_ipcam_base)/config/rviz/seadrone.rviz"/>
+        </group>
+
+        <group unless="$(arg rviz)">
+            <!--Joystick_node-->
+            <node name="joystick_node" pkg="seadrone_control" type="joystick_node" output="screen"/>
+
+            <!--Joystick-->
+	    <!--<node name="joy_node" pkg="joy" type="joy_node" output="screen"/>-->
+
+            <group if="$(arg camera)">
+                <!--Camera-->
+                <node name="camera_node" pkg="rpi_ipcam_base" type="cam.py" output="screen"/>
+            </group>
+        </group>
+    </group>
+</launch>
