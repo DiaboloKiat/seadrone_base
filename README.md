@@ -7,7 +7,7 @@ This is a robot repo for seadrone, including ros package for
 
 ---
 ## Joystick Controller
-<h4 align="center"> <img src="https://github.com/ARG-NCTU/seadrone_base/blob/master/img/Joystick.png"/> </h4>
+<h4 align="center"> <img src="https://github.com/DiaboloKiat/seadrone_base/blob/master/img/Joystick.png"/> </h4>
 
 ---
 
