@@ -1,0 +1,11 @@
+build/
+devel/
+__pycache__/
+
+
+
+.catkin_workspace
+*.vscode
+*.mp4
+*.pyc
+*.pyo
