@@ -5,7 +5,7 @@ git checkout master
 cd ~/seadrone_base/sensors/vision_opencv
 git checkout melodic
 
-cd ~/seadrone_base/sensors/apriltags-ros
+cd ~/seadrone_base/sensors/apriltags_ros
 git checkout indigo-devel
 
 cd ~/seadrone_base/sensors/realsense-ros
