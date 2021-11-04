@@ -8,14 +8,24 @@ git checkout master
 echo "Enter your message"
 read message
 
-BRANCH=master
-if [ ! -z "$1" ]; then
-    echo "operator on branch: $1"
-    BRANCH=$1
+if [ "$1" = "base" ]
+then
+    PROJECT=seadrone_base
+    REPO=seadrone_base
+elif [ "$1" = "project_seadrone" ]
+then
+    PROJECT=project_seadrone/catkin_ws/src/seadrone_base
+    REPO=project_seadrone
+else
+    echo "Please enter your project"
+    return 0
 fi
 
+BRANCH=master
 echo "---------------------------------------------------------------------------------------------------"
-source ~/seadrone_base/github/git_pull.sh $BRANCH
+source ~/$PROJECT/github/git_branch.sh $1
+echo "---------------------------------------------------------------------------------------------------"
+source ~/$PROJECT/github/git_pull.sh $1
 
 PULLSTAT=$?
 if [ "$PULLSTAT" -gt 0 ] ; then
@@ -33,7 +43,10 @@ echo "--------------------------------------------------------------------------
 echo "---------------------------------------------------------------------------------------------------"
 echo "------------------------------------------push seadrone_base---------------------------------------"
 echo "---------------------------------------------------------------------------------------------------"
-cd ~/project_seadrone/catkin_ws/src/seadrone_base
+cd ~/$PROJECT
 git add -A
 git commit -m "${message} on seadrone_base"
 git push
+
+
+cd ~/$REPO

@@ -1,14 +1,29 @@
 #!/bin/bash
 
+if [ "$1" = "base" ]
+then
+    PROJECT=seadrone_base
+    REPO=seadrone_base
+elif [ "$1" = "project_seadrone" ]
+then
+    PROJECT=project_seadrone/catkin_ws/src/seadrone_base
+    REPO=project_seadrone
+else
+    echo "Please enter your project"
+    return 0
+fi
+
+cd ~/$PROJECT
 git checkout master
 
-cd ~/seadrone_base/sensors/vision_opencv
+############################## submodules ####################################
+cd ~/$PROJECT/sensors/vision_opencv
 git checkout melodic
 
-cd ~/seadrone_base/sensors/apriltags_ros
+cd ~/$PROJECT/sensors/apriltags_ros
 git checkout indigo-devel
 
-cd ~/seadrone_base/sensors/realsense-ros
+cd ~/$PROJECT/sensors/realsense-ros
 git checkout 2.2.15
 
-cd ~/seadrone_base
+cd ~/$REPO

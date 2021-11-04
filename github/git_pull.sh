@@ -1,16 +1,24 @@
 #! /bin/bash
 
-# echo "password: $2"
-git checkout master
-BRANCH=master
-if [ ! -z "$1" ]; then
-    echo "pull branch: $1"
-    BRANCH=$1
+if [ "$1" = "base" ]
+then
+    PROJECT=seadrone_base
+    REPO=seadrone_base
+elif [ "$1" = "project_seadrone" ]
+then
+    PROJECT=project_seadrone/catkin_ws/src/seadrone_base
+    REPO=project_seadrone
+else
+    echo "Please enter your project"
+    return 0
 fi
 
+BRANCH=master
 echo "---------------------------------------------------------------------------------------------------"
 echo "---------------------------------------pull seadrone_base------------------------------------------"
 echo "---------------------------------------------------------------------------------------------------"
+cd ~/$PROJECT
+git checkout $BRANCH
 git pull
 
 CONFLICTS=$(git ls-files -u | wc -l)
@@ -23,7 +31,7 @@ BRANCH=melodic
 echo "---------------------------------------------------------------------------------------------------"
 echo "-------------------------------------pull vision_opencv--------------------------------------------"
 echo "---------------------------------------------------------------------------------------------------"
-cd ~/seadrone_base/sensors/vision_opencv
+cd ~/$PROJECT/sensors/vision_opencv
 git checkout $BRANCH
 git pull
 
@@ -37,7 +45,7 @@ BRANCH=indigo-devel
 echo "---------------------------------------------------------------------------------------------------"
 echo "-------------------------------------pull apriltags-ros--------------------------------------------"
 echo "---------------------------------------------------------------------------------------------------"
-cd ~/seadrone_base/sensors/apriltags_ros
+cd ~/$PROJECT/sensors/apriltags_ros
 git checkout $BRANCH
 git pull
 
@@ -50,7 +58,7 @@ fi
 echo "---------------------------------------------------------------------------------------------------"
 echo "-------------------------------------pull realsense-ros--------------------------------------------"
 echo "---------------------------------------------------------------------------------------------------"
-cd ~/seadrone_base/sensors/realsense-ros
+cd ~/$PROJECT/sensors/realsense-ros
 git checkout 2.2.15
 git pull
 
@@ -60,5 +68,5 @@ if [ "$CONFLICTS" -gt 0 ] ; then
    return 1
 fi
 
-cd ~/seadrone_base
+cd ~/$REPO
 return 0
