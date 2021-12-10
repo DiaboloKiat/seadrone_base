@@ -13,20 +13,6 @@ else
     return 0
 fi
 
-BRANCH=master
-echo "---------------------------------------------------------------------------------------------------"
-echo "---------------------------------------pull seadrone_base------------------------------------------"
-echo "---------------------------------------------------------------------------------------------------"
-cd ~/$PROJECT
-git checkout $BRANCH
-git pull
-
-CONFLICTS=$(git ls-files -u | wc -l)
-if [ "$CONFLICTS" -gt 0 ] ; then
-   echo "There is conflict in seadrone_base. Aborting"
-   return 1
-fi
-
 BRANCH=melodic
 echo "---------------------------------------------------------------------------------------------------"
 echo "-------------------------------------pull vision_opencv--------------------------------------------"
@@ -65,6 +51,20 @@ git pull
 CONFLICTS=$(git ls-files -u | wc -l)
 if [ "$CONFLICTS" -gt 0 ] ; then
    echo "There is conflict in realsense-ros. Aborting"
+   return 1
+fi
+
+BRANCH=master
+echo "---------------------------------------------------------------------------------------------------"
+echo "---------------------------------------pull seadrone_base------------------------------------------"
+echo "---------------------------------------------------------------------------------------------------"
+cd ~/$PROJECT
+git checkout $BRANCH
+git pull
+
+CONFLICTS=$(git ls-files -u | wc -l)
+if [ "$CONFLICTS" -gt 0 ] ; then
+   echo "There is conflict in seadrone_base. Aborting"
    return 1
 fi
 
